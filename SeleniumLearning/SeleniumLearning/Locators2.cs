@@ -32,12 +32,15 @@ namespace SeleniumLearning
             // IWebElement passwordSpace = _driver.FindElement(By.Id("password"));
             IWebElement passwordSpace = _driver.FindElement(By.CssSelector("#password"));
             passwordSpace.SendKeys("123456");
+
+            IWebElement rememberMeButton = _driver.FindElement(By.XPath("//div[@class='modal-form-group left']/input[3]"));
+            rememberMeButton.Click();
             
             // driver.FindElement(By.CssSelector("input[value='Sign In']")).Click();
             IWebElement signInButton = _driver.FindElement(By.CssSelector("#Login > button"));
             signInButton.Click();
             
-            Thread.Sleep(7000);
+            Thread.Sleep(3000);
 
         }
 
