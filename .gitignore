@@ -1,0 +1,59 @@
+# Build artifacts
+bin/
+obj/
+
+# Test results
+TestResults/
+*.trx
+*.coverage*
+*.log
+
+# Selenium drivers (these are downloaded per test run or by WebDriverManager)
+**/chromedriver
+**/selenium-manager*
+**/Chrome/
+
+# Rider project files
+.idea/
+*.DotSettings.user
+
+# Visual Studio settings
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+
+# NuGet-related files
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+*.nuget.dgspec.json
+project.assets.json
+project.lock.json
+project.nuget.cache
+*.csproj.nuget.*
+
+# Auto-generated files
+*.g.cs
+*.cache
+*.pdb
+*.dll
+*.exe
+*.json
+*.editorconfig
+*.txt
+
+# Others
+*.vs/
+_ReSharper*/
+*.bak
+*.tmp
+*.pidb
+*.db
+
+# OS junk
+.DS_Store
+Thumbs.db
+
