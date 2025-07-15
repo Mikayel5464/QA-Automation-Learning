@@ -24,15 +24,17 @@ namespace SeleniumLearning
         {
             IWebElement mainSignInButton = _driver.FindElement(By.Id("userProfileId"));
             mainSignInButton.Click();
-            
-            IWebElement usernameSpace = _driver.FindElement(By.Id("luser"));
+
+            // IWebElement usernameSpace = _driver.FindElement(By.Id("luser"));
+            IWebElement usernameSpace = _driver.FindElement(By.CssSelector("#luser"));
             usernameSpace.SendKeys("mikayel123");
-            
-            IWebElement passwordSpace = _driver.FindElement(By.Id("password"));
+
+            // IWebElement passwordSpace = _driver.FindElement(By.Id("password"));
+            IWebElement passwordSpace = _driver.FindElement(By.CssSelector("#password"));
             passwordSpace.SendKeys("123456");
             
             // driver.FindElement(By.CssSelector("input[value='Sign In']")).Click();
-            IWebElement signInButton = _driver.FindElement(By.CssSelector("input[class='btn-green']"));
+            IWebElement signInButton = _driver.FindElement(By.CssSelector("#Login > button"));
             signInButton.Click();
             
             Thread.Sleep(7000);
