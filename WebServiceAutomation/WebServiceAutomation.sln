@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceAutomation", "WebServiceAutomation\WebServiceAutomation.csproj", "{7B80EE16-703B-43CA-9F58-883BAE0DBF2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharpAutomation", "RestSharpAutomation\RestSharpAutomation.csproj", "{D5E0FB83-4493-4BDD-BC83-534AE0EE3983}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B80EE16-703B-43CA-9F58-883BAE0DBF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B80EE16-703B-43CA-9F58-883BAE0DBF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B80EE16-703B-43CA-9F58-883BAE0DBF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B80EE16-703B-43CA-9F58-883BAE0DBF2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5E0FB83-4493-4BDD-BC83-534AE0EE3983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5E0FB83-4493-4BDD-BC83-534AE0EE3983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5E0FB83-4493-4BDD-BC83-534AE0EE3983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E0FB83-4493-4BDD-BC83-534AE0EE3983}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
