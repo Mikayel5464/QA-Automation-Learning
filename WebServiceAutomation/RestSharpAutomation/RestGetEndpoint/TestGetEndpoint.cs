@@ -1,4 +1,5 @@
 using RestSharp;
+using RestSharpAutomation.HelperClass.Request;
 
 namespace RestSharpAutomation.RestGetEndpoint
 {
@@ -6,7 +7,6 @@ namespace RestSharpAutomation.RestGetEndpoint
     public class TestGetEndpoint
     {
         private string _url = "https://petstore.swagger.io/v2/pet/findByStatus?status=available&status=pending&status=sold";
-            // "https://reqres.in/api/unknown/2";
         
         [TestMethod]
         public void TestGetUsingRestSharp()
@@ -66,7 +66,22 @@ namespace RestSharpAutomation.RestGetEndpoint
                 Console.WriteLine($"Response Content: {response.Content}");
             }
         }
-        
-        
+
+        [TestMethod]
+        public void TestGetWithXMLUsingHelperClass()
+        {
+            Dictionary<string, string> headers = new Dictionary<string, string>()
+            {
+                {"Accept", "application/xml" }
+            };
+
+            RestClientHelper helper = new RestClientHelper();
+            IRestResponse response = helper.PerformGetRequest( _url, headers );
+
+            Assert.AreEqual(200, (int)response.StatusCode);
+            Assert.IsNotNull(response.Content, "Content is Null/Empty");
+
+            
+        }
     }
 }
