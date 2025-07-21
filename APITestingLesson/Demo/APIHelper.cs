@@ -1,34 +1,40 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APIDemo
 {
-    public class APIHelper
+    public class APIHelper<T>
     {
-        private readonly string _url = "https://reqres.in";
+        private readonly string _baseUrl = "https://reqres.in/";
         public RestClient client;
         public RestRequest request;
 
         public RestClient SetUrl(string endpoint)
         {
-            var url = Path.Combine(_url, endpoint);
+            string url = _baseUrl + endpoint;
             var client = new RestClient(url);
+
+            client.AddDefaultHeader("x-api-key", "reqres-free-v1");
 
             return client;
         }
 
         public RestRequest CreatePostRequest(string payload)
         {
-            var request = new RestRequest(Method.Post);
+            var request = new RestRequest("api/users", Method.Post);
+
             request.AddHeader("Accept", "application/json");
 
             request.AddParameter("application/json", payload, ParameterType.RequestBody);
+
+            return request;
+        }
+
+        public RestRequest CreateGetRequest()
+        {
+            var request = new RestRequest(_baseUrl, Method.Get);
+            request.AddHeader("Accept", "application/json");
 
             return request;
         }

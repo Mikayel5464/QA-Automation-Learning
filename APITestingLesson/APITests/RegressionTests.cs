@@ -20,11 +20,19 @@ namespace APITests
         public void CreateNewUser()
         {
             string payload = @"{
-                                ""name"": ""morpheus"",
-                                ""job"": ""leader""
+                                ""name"": ""Mike"",
+                                ""job"": ""Team leader""
                                }";
 
+            var user = new APIHelper<CreateUserDTO>();
+            var url = user.SetUrl("api/users");
+            var request = user.CreatePostRequest(payload);
+            var response = user.GetResponse(url, request);
 
+            CreateUserDTO content = user.GetContent<CreateUserDTO>(response);
+
+            Assert.AreEqual("Mike", content.name);
+            Assert.AreEqual("Team leader", content.job);
         }
     }
 }
