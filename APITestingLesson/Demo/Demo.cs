@@ -1,28 +1,37 @@
 ﻿using RestSharp;
 using Newtonsoft.Json;
 using UsersList;
+using APIDemo;
 
 namespace APIDemo
 {
-    public class Demo
+    public class Demo<T>
     {
-        private readonly string _url = "https://reqres.in";
-        private readonly string _endpoint = "/api/users?page=2";
+        //private readonly string _url = "https://reqres.in";
+        //private readonly string _endpoint = "/api/users?page=2";
 
-        public ListOfUsersDTO GetUsers()
+        public ListOfUsersDTO GetUsers(string endpoint)
         {
-            var client = new RestClient(_url);
-            var request = new RestRequest(_endpoint, Method.Get);
+            var user = new APIHelper<ListOfUsersDTO>();
+            var url = user.SetUrl(endpoint);
+            var request = user.CreateGetRequest();
+            var response = user.GetResponse(url, request);
 
-            request.AddHeader("Accept", "application/json");
-            request.RequestFormat = DataFormat.Json;
+            ListOfUsersDTO content = user.GetContent<ListOfUsersDTO>(response);
 
-            RestResponse response = client.Execute(request);
-            var content = response.Content;
+            return content;
+        }
 
-            var users = JsonConvert.DeserializeObject<ListOfUsersDTO>(content);
+        public CreateUserDTO CreateUser(string endpoint, dynamic payload)
+        {
+            var user = new APIHelper<CreateUserDTO>();
+            var url = user.SetUrl(endpoint);
+            var request = user.CreatePostRequest(payload);
+            var response = user.GetResponse(url, request);
 
-            return users;
+            CreateUserDTO content = user.GetContent<CreateUserDTO>(response);
+
+            return content;
         }
     }
 }

@@ -20,6 +20,14 @@ namespace APIDemo
             return client;
         }
 
+        public RestRequest CreateGetRequest()
+        {
+            var request = new RestRequest("api/users?page=2", Method.Get);
+            request.AddHeader("Accept", "application/json");
+
+            return request;
+        }
+
         public RestRequest CreatePostRequest(string payload)
         {
             var request = new RestRequest("api/users", Method.Post);
@@ -31,9 +39,20 @@ namespace APIDemo
             return request;
         }
 
-        public RestRequest CreateGetRequest()
+        public RestRequest CreatePutRequest(string payload)
         {
-            var request = new RestRequest(_baseUrl, Method.Get);
+            var request = new RestRequest("api/users/2", Method.Put);
+
+            request.AddHeader("Accept", "application/json");
+
+            request.AddParameter("application/json", payload, ParameterType.RequestBody);
+
+            return request;
+        }
+
+        public RestRequest CreateDeleteRequest()
+        {
+            var request = new RestRequest("api/users/2", Method.Delete);
             request.AddHeader("Accept", "application/json");
 
             return request;

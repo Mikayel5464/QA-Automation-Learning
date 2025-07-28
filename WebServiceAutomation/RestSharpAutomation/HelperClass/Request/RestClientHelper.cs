@@ -1,19 +1,20 @@
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace RestSharpAutomation.HelperClass.Request
 {
     public class RestClientHelper
     {
-        private IRestClient GetRestClient()
+        private RestClient GetRestClient()
         {
-            IRestClient client = new RestClient();
+            RestClient client = new RestClient();
 
             return client;
         }
 
-        private IRestRequest GetRestRequest(string url, Dictionary<string, string> headers, Method method)
+        private RestRequest GetRestRequest(string url, Dictionary<string, string> headers, Method method)
         {
-            IRestRequest request = new RestRequest()
+            RestRequest request = new RestRequest()
             {
                 Method = method,
                 Resource = url
@@ -27,40 +28,43 @@ namespace RestSharpAutomation.HelperClass.Request
             return request;
         }
 
-        private IRestResponse SendRequest(IRestRequest request)
+        private RestResponse SendRequest(RestRequest request)
         {
             IRestClient client = GetRestClient();
-            IRestResponse response = client.Execute(request);
+            RestResponse response = client.Execute(request);
             
             return response;
         }
 
-        private IRestResponse<T> SendRequest<T>(IRestRequest request) where T : new()
+        private RestResponse<T> SendRequest<T>(RestRequest request) where T : new()
         {
-            IRestClient client = GetRestClient();
-            IRestResponse<T> response = client.Execute<T>(request);
+            RestClient client = GetRestClient();
+            RestResponse<T> response = client.Execute<T>(request);
 
             if (response.ContentType == "application/xml")
             {
-                var deserializer = new RestSharp.Deserializers.DotNetXmlDeserializer();
-                response.Data = deserializer.Deserialize<T>(response);
+                var content = response.Content;
+                return (RestResponse<T>)JsonConvert.DeserializeObject(content);
+
+                // var deserializer = new RestSharp.Deserializers.DotNetXmlDeserializer();
+                // response.Data = deserializer.Deserialize<T>(response);
             }
             
             return response;
         }
 
-        public IRestResponse PerformGetRequest(string url, Dictionary<string, string> headers)
+        public RestResponse PerformGetRequest(string url, Dictionary<string, string> headers)
         {
-            IRestRequest request = GetRestRequest(url, headers, Method.GET);
-            IRestResponse response = SendRequest(request);
+            RestRequest request = GetRestRequest(url, headers, Method.Get);
+            RestResponse response = SendRequest(request);
 
             return response;
         }
         
-        public IRestResponse<T> PerformGetRequest<T>(string url, Dictionary<string, string> headers)  where T : new()
+        public RestResponse<T> PerformGetRequest<T>(string url, Dictionary<string, string> headers)  where T : new()
         {
-            IRestRequest request = GetRestRequest(url, headers, Method.GET);
-            IRestResponse<T> response = SendRequest<T>(request);
+            RestRequest request = GetRestRequest(url, headers, Method.Get);
+            RestResponse<T> response = SendRequest<T>(request);
 
             return response;
         }

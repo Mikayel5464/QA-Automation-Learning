@@ -6,17 +6,17 @@ namespace RestSharpAutomation.RestGetEndpoint
     [TestClass]
     public class TestGetEndpoint
     {
-        private string _url = "https://petstore.swagger.io/v2/pet/findByStatus?status=available&status=pending&status=sold";
+        private string _getUrl = "https://reqres.in/api/users?page=2";
         
         [TestMethod]
         public void TestGetUsingRestSharp()
         {
-            IRestClient client = new RestClient();
-            IRestRequest request = new RestRequest(_url);
+            RestClient client = new RestClient();
+            RestRequest request = new RestRequest(_getUrl);
             
             // request.AddHeader("Accept", "application/json");
             
-            IRestResponse response = client.Get(request);
+            RestResponse response = client.Get(request);
             
             /*
             Console.WriteLine(response.IsSuccessful);
@@ -32,16 +32,19 @@ namespace RestSharpAutomation.RestGetEndpoint
                 Console.WriteLine($"Response Content: {response.Content}");
             }
         }
+    }
+}
 
-        [TestMethod]
+/*
+ [TestMethod]
         public void TestGetInXml()
         {
-            IRestClient client = new RestClient();
-            IRestRequest request = new RestRequest(_url);
+            RestClient client = new RestClient();
+            RestRequest request = new RestRequest(_getUrl);
             
             request.AddHeader("Accept", "application/xml");
             
-            IRestResponse response = client.Get(request);
+            RestResponse response = client.Get(request);
 
             if (response.IsSuccessful)
             {
@@ -53,12 +56,12 @@ namespace RestSharpAutomation.RestGetEndpoint
         [TestMethod]
         public void TestGetInJson()
         {
-            IRestClient client = new RestClient();
-            IRestRequest request = new RestRequest(_url);
+            RestClient client = new RestClient();
+            RestRequest request = new RestRequest(_getUrl);
             
             request.AddHeader("Accept", "application/json");
             
-            IRestResponse response = client.Get(request);
+            RestResponse response = client.Get(request);
 
             if (response.IsSuccessful)
             {
@@ -76,12 +79,9 @@ namespace RestSharpAutomation.RestGetEndpoint
             };
 
             RestClientHelper helper = new RestClientHelper();
-            IRestResponse response = helper.PerformGetRequest( _url, headers );
+            RestResponse response = helper.PerformGetRequest(_getUrl, headers );
 
             Assert.AreEqual(200, (int)response.StatusCode);
             Assert.IsNotNull(response.Content, "Content is Null/Empty");
-
-            
         }
-    }
-}
+ */

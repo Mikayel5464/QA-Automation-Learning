@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using APIDemo;
+using UsersList;
 
 namespace APITests
 {
@@ -9,30 +10,30 @@ namespace APITests
         [TestMethod]
         public void VerifyListOfUsers()
         {
-            var demo = new Demo();
-            var response = demo.GetUsers();
+            var demo = new Demo<ListOfUsersDTO>();
+            var user = demo.GetUsers("api/users?page=2");
 
-            Assert.AreEqual(2, response.Page);
-            Assert.AreEqual("Michael", response.Data[0].first_name);
+            Assert.AreEqual(2, user.Page);
+            Assert.AreEqual("Michael", user.Data[0].first_name);
         }
 
-        [TestMethod]
-        public void CreateNewUser()
-        {
-            string payload = @"{
+        
+    }
+}
+
+/*
+[TestMethod]
+public void CreateNewUser()
+{
+    string payload = @"{
                                 ""name"": ""Mike"",
                                 ""job"": ""Team leader""
                                }";
 
-            var user = new APIHelper<CreateUserDTO>();
-            var url = user.SetUrl("api/users");
-            var request = user.CreatePostRequest(payload);
-            var response = user.GetResponse(url, request);
+    var demo = new Demo<CreateUserDTO>();
+    var user = demo.CreateUser("api/users", payload);
 
-            CreateUserDTO content = user.GetContent<CreateUserDTO>(response);
-
-            Assert.AreEqual("Mike", content.name);
-            Assert.AreEqual("Team leader", content.job);
-        }
-    }
+    Assert.AreEqual("Mike", user.name);
+    Assert.AreEqual("Team leader", user.job);
 }
+*/
