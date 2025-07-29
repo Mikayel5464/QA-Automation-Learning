@@ -53,5 +53,26 @@ namespace FlightTest
 
             flight.BookingList.Should().ContainEquivalentOf(new Booking("a@b.com", 4));
         }
+
+        [Theory]
+        [InlineData(3, 1, 1, 3)]
+        [InlineData(4, 2, 2, 4)]
+        public void Canceling_booking_frees_up_the_seats(
+            uint initialCapacity,
+            uint numberOfSeatsToBook,
+            uint numberOfSeatsToCancel,
+            uint remainingNumberOfSeats
+            )
+        {
+            // given
+            var flight = new Flight(initialCapacity);
+            flight.Book("a@b.com", numberOfSeatsToBook);
+
+            // when
+            flight.CancelBooking("a@b.com", numberOfSeatsToCancel);
+
+            // then
+            flight.RemainingNumberOfSeats.Should().Be(remainingNumberOfSeats);
+        }
     }
 }

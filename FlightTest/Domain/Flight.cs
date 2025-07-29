@@ -40,5 +40,10 @@
 
             return null;
         }
+
+        public void CancelBooking(string email, uint numberOfSeats)
+        {
+            _RemainingNumberOfSeats += numberOfSeats;
+        }
     }
 }
