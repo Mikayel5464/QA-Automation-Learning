@@ -22,6 +22,14 @@
             }
         }
 
+        public Guid Id { get; }
+
+        [Obsolete("Needed by EF")]
+        Flight()
+        {
+
+        }
+
         public Flight(uint seatCapacity) 
         {
             _RemainingNumberOfSeats = seatCapacity;
@@ -41,9 +49,16 @@
             return null;
         }
 
-        public void CancelBooking(string email, uint numberOfSeats)
+        public object? CancelBooking(string passedgerEmail, uint numberOfSeats)
         {
+            if (!BookingList.Any(booking => booking.Email == passedgerEmail))
+            {
+                return new BookingNotFoundError();
+            }
+            
             _RemainingNumberOfSeats += numberOfSeats;
+
+            return null;
         }
     }
 }
